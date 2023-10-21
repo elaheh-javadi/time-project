@@ -1,0 +1,155 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>time project</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .project{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .watches {
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            border: 10px solid #000000;
+            position: relative;
+        }
+
+        .circle {
+            position: relative;
+            left: 245px;
+            top: 245px;
+            background-color: #000;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+        }
+
+        .minute {
+            border: 3px solid #000;
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 50%;
+            width: 200px;
+            position: absolute;
+            top: calc(500px - 252px);
+            left: 45px;
+            transform-origin: right;
+        }
+
+        .hours {
+
+            border: 3px solid #000;
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 50%;
+            width: 100px;
+            position: absolute;
+            top: calc(500px - 252px);
+            left: 145px;
+            transform-origin: right;
+        }
+
+        .second {
+
+            border: 3px solid #ff0000;
+            border-radius: 10px;
+            width: 200px;
+            position: absolute;
+            top: calc(500px - 252px);
+            left: 45px;
+            transform-origin: right;
+
+        }
+
+        .watches-text{
+
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            top: 50px;
+            font-size: 40px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="project">
+
+        <div class="watches">
+
+            <div class="hours"></div>
+            <div class="minute"></div>
+            <div class="second"></div>
+
+            <div class="circle"></div>
+
+        </div>
+
+        <div class="watches-text">
+
+            <div class="houre-text">00</div>:
+            <div class="min-text">00</div>:
+            <div class="sec-text">00</div>
+
+        </div>
+
+    </div>
+    <script>
+
+        var hourspointer = document.querySelector(".hours");
+        var minutepointer = document.querySelector(".minute");
+        var secondpointer = document.querySelector(".second");
+
+        var texthourse = document.querySelector(".houre-text");
+        var textminute = document.querySelector(".min-text");
+        var textsecond = document.querySelector(".sec-text");
+
+        function curentData(){
+
+            var data = new Date();
+
+            var hourseangle = (data.getHours() * 30) + 90 ;
+            var minuteangle = (data.getMinutes() * 6) + 90 ;
+            var secondangle = (data.getSeconds() * 6) + 90 ;
+
+            hourspointer.style.transform = "rotate(" + hourseangle + "deg" + ")";
+            minutepointer.style.transform = "rotate(" + minuteangle + "deg" + ")";
+            secondpointer.style.transform = "rotate(" + secondangle + "deg" + ")";
+
+
+            texthourse.innerHTML = data.getHours();
+            textminute.innerHTML = data.getMinutes();
+            textsecond.innerHTML = data.getSeconds();
+
+            if(textsecond.textContent < 10){
+                textsecond.textContent = "0" + data.getSeconds();
+            }
+            if(textminute.textContent < 10){
+                textminute.textContent = "0" + data.getMinutes();
+            }
+            if(texthourse.textContent < 10){
+                texthourse.textContent = "0" + data.getHours();
+            }
+        }
+
+        setInterval(curentData);
+
+    </script>
+
+</body>
+
+</html>
